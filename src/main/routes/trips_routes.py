@@ -1,7 +1,21 @@
-from flask import jsonify, Blueprint
+from flask import jsonify, Blueprint, request
 
 trips_routes_bp = Blueprint("trip_routes", __name__)
 
+from src.controlers.trip_creator import TripCreator
+
+from src.models.repositories.trips_repository import TripsRpository
+from src.models.repositories.emails_to_invite_repository import EmailsToInviteRpository
+
+from src.models.settings.db_connection_handler import db_connection_handler
+
 @trips_routes_bp.route("/trips", methods=["POST"])
 def create_trip():
-    return jsonify({ "ola": "mundo" }), 200
+    conn = db_connection_handler.get_connection()
+    trips_repository = TripsRpository(conn)
+    emails_repository = EmailsToInviteRpository(conn)
+    controller = TripCreator(trips_repository, emails_repository)
+
+    response = controller.create(request.json)
+
+    return jsonify(response["body"]), response["status_code"]
