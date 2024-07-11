@@ -1,7 +1,7 @@
 import uuid
 import pytest
 from src.models.settings.db_connection_handler import db_connection_handler
-from emails_to_invite_repositorie import EmailsToInviteRpository
+from src.models.repositories.emails_to_invite_repository import EmailsToInviteRpository
 
 db_connection_handler.connect()
 trip_id =  str(uuid.uuid4())
