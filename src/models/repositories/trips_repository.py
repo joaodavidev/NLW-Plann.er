@@ -11,7 +11,7 @@ class TripsRpository:
                 INSERT INTO trips
                     (id, destination, start_date, end_date, owner_name, owner_email)
                 VALUES
-                (?, ?, ?, ?, ?, ?)
+                    (?, ?, ?, ?, ?, ?)
             ''',    (
                 trips_infos["id"],
                 trips_infos["destination"],

@@ -11,7 +11,7 @@ class EmailsToInviteRpository:
                 INSERT INTO emails_to_invite
                     (id, trip_id, email)
                 VALUES
-                (?, ?, ?)
+                    (?, ?, ?)
             ''',    (
                 email_infos["id"],
                 email_infos["trip_id"],
@@ -28,7 +28,7 @@ class EmailsToInviteRpository:
             SELECT * FROM emails_to_invite WHERE trip_id = ?
             ''', (trip_id,)
         )
-        trip = cursor.fetchall()
-        return trip
+        emails = cursor.fetchall()
+        return emails
     
 
